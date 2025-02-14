@@ -7,27 +7,32 @@ def total_salary(path):
                 parts = line.strip().split(',')
                 if len(parts) != 2:
                     print (f'Incorrect format: {line.strip()}')
-                    continue
+                    continue #Skip incorrect line
                 try:
-                    salary = int(parts[1])
+                    salary = int(parts[1]) #Converter salary to number
                     salaries.append(salary)
                 except ValueError:
                     print (f'Invalid salary value: {parts[1]} in line {line.strip() }')
-                    continue
+                    continue #Skip incorrect line
         if not salaries:
             return 0, 0
 
         total = sum(salaries)
-        average = total / len(salaries) if salaries else 0
+        average = total / len(salaries)
 
         return total, average
 
     except FileNotFoundError:
         print(f"File not found.")
-        return None
+        return None #Returns None if file not found
 
     except Exception as e:
         print(f"Unexpected error: {e}")
         return None
+#Test
+total, average = total_salary("/Users/ruslana/Desktop/my_repo1/Modul_4/salaries.txt")
 
-print(total_salary("salaries.txt"))
+if total is not None:
+    print(f"Total salary:{total}, Average salary: {average}")
+else:
+    print("Error")
